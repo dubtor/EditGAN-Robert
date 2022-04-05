@@ -29,12 +29,25 @@ import argparse
 import copy
 from io import BytesIO
 from models.EditGAN.EditGAN_tool import Tool
+from pyngrok import ngrok
+
+print("Starting server...")
 
 np.random.seed(6)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 app = Flask(__name__)
 CORS(app, support_credentials=True)
+
+print("Server ready")
+
+# open a tunneled connection from localhost:8888 to a public URL via ngrok
+NGROK_AUTH_TOKEN = ""
+ngrok.kill()
+ngrok.set_auth_token(NGROK_AUTH_TOKEN)
+public_url = ngrok.connect(8888)
+
+print("Please open URL: ", public_url)
 
 
 def get_args():
