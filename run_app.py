@@ -39,15 +39,19 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 app = Flask(__name__)
 CORS(app, support_credentials=True)
 
-print("Server ready")
+print("Server ready...")
 
-# open a tunneled connection from localhost:8888 to a public URL via ngrok
-NGROK_AUTH_TOKEN = ""
+# Terminate open tunnels if exist
 ngrok.kill()
-ngrok.set_auth_token(NGROK_AUTH_TOKEN)
-public_url = ngrok.connect(8888)
 
-print("Please open URL: ", public_url)
+# Setting the authtoken (optional)
+# Get your authtoken from https://dashboard.ngrok.com/auth
+NGROK_AUTH_TOKEN = "27O24nJwbLUxd82LD8Z3ZVBugSk_35Je7DfmNmgHDLcd7nXrR"
+ngrok.set_auth_token(NGROK_AUTH_TOKEN)
+
+# Open an HTTPs tunnel on port 5000 for http://localhost:5000
+public_url = ngrok.connect(8888)
+print("Open URL in browser:", public_url)
 
 
 def get_args():
