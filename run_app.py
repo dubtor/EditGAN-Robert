@@ -66,6 +66,12 @@ def get_args():
 @app.route('/')
 def index():
     global tool
+
+    # Get the current working directory
+    cwd = os.getcwd()
+    os.chdir('/content/EditGAN-Robert')
+    # Print the current working directory
+    print("Current working directory: {0}".format(cwd))
     tool = Tool()
 
     return render_template('index.html')
