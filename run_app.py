@@ -37,6 +37,7 @@ np.random.seed(6)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 app = Flask(__name__)
+app.config['CORS_HEADERS'] = 'Content-Type'
 CORS(app, support_credentials=True)
 
 print("Server ready...")
