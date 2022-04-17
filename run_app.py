@@ -83,6 +83,8 @@ def index():
 def edit_from_mask():
     data = request.get_json(force=True)
 
+    torch.cuda.empty_cache()
+
     # load mask
     base64im = data['imageBase64']
     # extension = base64im.split('/')[1].split(';')[0]
